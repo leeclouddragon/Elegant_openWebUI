@@ -1,0 +1,570 @@
+@import url('../../assets/fonts.css');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+:root {
+    /* 土色调为主的文艺复兴风格色彩方案 */
+    --primary-color: #8D6E63;  /* 深木色 */
+    --secondary-color: #A1887F; /* 中木色 */
+    --accent-color: #D4AF37;   /* 古典金色 */
+    --background-color: #F5F1E6; /* 羊皮纸色 */
+    --card-background: #FFF8E1; /* 浅米色 */
+    --border-color: #D7CCC8;   /* 浅土色边框 */
+    --text-primary: #3E2723;   /* 深棕色文字 */
+    --text-secondary: #5D4037; /* 中棕色文字 */
+    --text-tertiary: #8D6E63;  /* 浅棕色文字 */
+    --shadow-light: 0 2px 10px rgba(62, 39, 35, 0.05);
+    --shadow-medium: 0 5px 15px rgba(62, 39, 35, 0.08);
+    --radius-small: 4px;
+    --radius-medium: 8px;
+    --radius-large: 12px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    /* 更换为文艺复兴风格的字体，添加更多备选 */
+    --font-sans: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Garamond', 'Times New Roman', serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-serif: 'Libre Baskerville', serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-serif: 'Merriweather', serif;
+    --font-serif: 'Lora', serif;
+    --font-serif: 'Source Serif Pro', serif;
+    --font-serif: 'Lora', serif;
+    --font-serif: 'Source Serif Pro', serif;
+    --font-serif: 'Lora', serif;
+    --font-serif: 'Source Serif Pro', serif;
+    --font-mono: 'Courier New', monospace;
+    
+    /* 新增文艺复兴风格的变量 */
+    --border-ornate: 1px solid var(--border-color);
+    --ornament-color: #D4AF37; /* 金色装饰元素 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* 简化背景，确保不会因为复杂背景导致渲染问题 */
+    background-image: 
+        linear-gradient(to bottom right, 
+            rgba(245, 241, 230, 0.7), 
+            rgba(255, 248, 225, 0.7), 
+            rgba(245, 241, 230, 0.7));
+    
+    position: relative;
+}
+
+/* 暂时注释掉可能导致问题的代码 */
+/*
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(rgba(62, 39, 35, 0.1) 2px, transparent 2px),
+        radial-gradient(rgba(62, 39, 35, 0.05) 1px, transparent 1px);
+    background-size: 150px 150px, 80px 80px;
+    background-position: 0 0, 30px 30px;
+    opacity: 0.3;
+    z-index: 1;
+}
+*/
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 改为space-between，更好地分配空间 */
+    align-items: center;
+    min-height: 90vh; /* 保持最小高度为视口高度 */
+    width: 100%;
+    padding: 0 5%;
+    position: relative; /* 确保是相对定位 */
+    overflow: hidden; /* 防止内容溢出导致滚动条 */
+    overflow-x: hidden; /* 只隐藏水平滚动条 */
+    overflow-y: visible; /* 允许垂直内容溢出 */
+}
+
+.content-wrapper {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -66%); 
+    width: 100%;
+    max-width: 800px;
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); /* 添加平滑过渡，使用贝塞尔曲线使动画更自然 */
+}
+
+.chat-active .content-wrapper {
+    top: auto; /* 取消顶部定位 */
+    bottom: 0; /* 固定到底部 */
+    transform: translate(-50%, 0); /* 只需要水平居中 */
+    padding-bottom: 20px; /* 底部添加一些内边距 */
+}
+
+.welcome, 
+.input-section,
+.tools-bar {
+    width: 100%;
+}
+
+.tools-bar
+.input-section,
+.welcome {
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;  /* 替换现有的 margin: 88px auto 40px; */
+
+}
+
+.welcome h1 {
+    font-family: 'Cormorant Garamond', 'Baskerville', 'Libre Baskerville', 'Playfair Display', serif;
+    font-size: 2.75rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    /* 添加装饰性下划线 */
+    position: relative;
+    padding-bottom: 0px;
+}
+
+
+/* 装饰性标题下划线 */
+/*
+.welcome h1::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+*/
+
+.welcome p {
+    font-family: 'Cormorant Garamond', 'Baskerville', 'Libre Baskerville', 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.8;
+    /* 注释掉首字下沉效果 */
+    /*
+    position: relative;
+    */
+}
+
+/* 首字下沉效果 */
+/*
+.welcome p::first-letter {
+    font-size: 2.5em;
+    font-weight: 500;
+    color: var(--accent-color);
+    float: left;
+    margin-right: 8px;
+    line-height: 1;
+}
+*/
+
+.welcome.minimized {
+    margin-bottom: 20px;
+    padding: 16px;
+}
+
+.welcome.minimized h1 {
+    font-size: 1.5rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.welcome.minimized h1::after {
+    width: 80px;
+}
+
+.welcome.minimized p {
+    display: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .welcome h1 {
+        font-size: 2.25rem;
+    }
+    
+    .welcome p {
+        font-size: 1.1rem;
+    }
+}
+
+/* 搜索框样式 */
+input[type="text"] {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-medium);
+    background-color: var(--card-background);
+    box-shadow: var(--shadow-light);
+    transition: all 0.2s ease;
+    max-width: 800px;
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+}
+
+/* 按钮样式 */
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: all 0.2s ease;
+    font-family: var(--font-sans);
+}
+
+button:focus {
+    outline: none;
+}
+
+/* 工具栏按钮样式 */
+.toolbar-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-small);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    /* 添加文艺复兴风格的按钮装饰 */
+    position: relative;
+    overflow: hidden;
+}
+
+.toolbar-button:hover {
+    background-color: rgba(141, 110, 99, 0.08);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-light);
+    color: var(--text-primary);
+    border-color: var(--accent-color);
+}
+
+.toolbar-button span {
+    font-size: 1.1rem;
+}
+
+/* 添加新的文艺复兴风格卡片组件 */
+.renaissance-card {
+    background-color: var(--card-background);
+    border: var(--border-ornate);
+    border-radius: var(--radius-medium);
+    padding: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: var(--shadow-medium);
+}
+
+/* 装饰性分隔线 */
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+    margin: 24px 0;
+    opacity: 0.6;
+}
+
+/* 添加装饰性角落花纹 */
+.renaissance-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+}
+
+.renaissance-corner-tl {
+    top: 20px;
+    left: 20px;
+    border-top: 3px solid rgba(212, 175, 55, 0.3);
+    border-left: 3px solid rgba(212, 175, 55, 0.3);
+    border-top-left-radius: 8px;
+}
+
+.renaissance-corner-tr {
+    top: 20px;
+    right: 20px;
+    border-top: 3px solid rgba(212, 175, 55, 0.3);
+    border-right: 3px solid rgba(212, 175, 55, 0.3);
+    border-top-right-radius: 8px;
+}
+
+.renaissance-corner-bl {
+    bottom: 20px;
+    left: 20px;
+    border-bottom: 3px solid rgba(212, 175, 55, 0.3);
+    border-left: 3px solid rgba(212, 175, 55, 0.3);
+    border-bottom-left-radius: 8px;
+}
+
+.renaissance-corner-br {
+    bottom: 20px;
+    right: 20px;
+    border-bottom: 3px solid rgba(212, 175, 55, 0.3);
+    border-right: 3px solid rgba(212, 175, 55, 0.3);
+    border-bottom-right-radius: 8px;
+}
+
+/* 欢迎区域的装饰性花纹 */
+.renaissance-ornament {
+    width: 120px;
+    height: 20px;
+    margin: 0 auto;
+    position: relative;
+    opacity: 0.6;
+}
+
+.renaissance-ornament::before,
+.renaissance-ornament::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: var(--accent-color);
+}
+
+.renaissance-ornament::before {
+    width: 100%;
+    top: 10px;
+    left: 0;
+}
+
+.renaissance-ornament::after {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.renaissance-ornament-top {
+    margin-bottom: 20px;
+}
+
+.renaissance-ornament-top::before {
+    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+}
+
+.renaissance-ornament-bottom {
+    margin-top: 20px;
+}
+
+.renaissance-ornament-bottom::before {
+    background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+}
+
+/* 为导航栏添加文艺复兴风格 */
+.nav {
+    border-bottom: var(--border-ornate);
+    background-color: var(--card-background);
+    box-shadow: var(--shadow-light);
+}
+
+.logo-main {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.logo-subtitle {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* 为工具栏按钮添加文艺复兴风格 */
+.tool-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-small);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    
+    /* 添加微妙的纹理 */
+    background-image: linear-gradient(to bottom, 
+        rgba(255, 248, 225, 0.7), 
+        rgba(255, 252, 240, 0.9));
+}
+
+.tool-button:hover {
+    background-color: rgba(141, 110, 99, 0.08);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-light);
+    color: var(--text-primary);
+    border-color: var(--accent-color);
+    
+    /* 悬停时的微妙光效 */
+    background-image: linear-gradient(to bottom, 
+        rgba(255, 248, 225, 0.9), 
+        rgba(255, 252, 240, 1));
+}
+
+.tool-button span {
+    color: var(--accent-color);
+}
+
+/* 注释掉这些样式 */
+/*
+.welcome::before,
+.welcome::after,
+.welcome .corner-tr,
+.welcome .corner-bl {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0.3;
+}
+
+.welcome::before {
+    top: 0;
+    left: 0;
+    border-top: 2px solid var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+}
+
+.welcome::after {
+    top: 0;
+    right: 0;
+    border-top: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+}
+
+.welcome .corner-tr {
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+}
+
+.welcome .corner-bl {
+    bottom: 0;
+    right: 0;
+    border-bottom: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+}
+*/
+
+.content-wrapper .welcome {
+    margin-bottom: 20px; /* 减少底部边距 */
+    flex-shrink: 1; /* 允许在需要时收缩 */
+}
+
+.content-wrapper .input-section {
+    margin: 20px 0; /* 给输入框增加一些空间 */
+}
+
+/* 欢迎区域过渡 */
+.welcome {
+    opacity: 1;
+    max-height: 200px; /* 设置一个合理的最大高度 */
+    margin-bottom: 40px;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+}
+
+/* 聊天激活时隐藏欢迎区域 */
+.chat-active .welcome {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+}
+
+/* 工具栏过渡 */
+.toolbar {
+    opacity: 1;
+    max-height: 100px; /* 设置一个合理的最大高度 */
+    margin-top: 40px;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+}
+
+/* 聊天激活时隐藏工具栏 */
+.chat-active .toolbar {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+}
+
+/* 输入区域过渡 */
+.input-section {
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 聊天区域过渡优化 */
+.chat-area {
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    max-height: 0;
+    overflow: visible; /* 修改为visible */
+}
+
+.chat-area.active {
+    opacity: 1;
+    max-height: none;
+    margin-bottom: 20px;
+}
+
+/* 聊天激活时固定输入框在底部 */
+.chat-active .input-section {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  z-index: 100;
+  background-color: var(--background-color);
+  padding: 10px;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-medium);
+  margin: 0; /* 重置margin */
+} 

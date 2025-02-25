@@ -1,0 +1,39 @@
+/* Font definitions */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display'),
+       url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: local('SF Mono'),
+       local('Menlo'),
+       local('Monaco'),
+       local('Consolas');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 使用系统字体作为备选，确保页面能够渲染 */
+@font-face {
+  font-family: 'Palatino Linotype';
+  src: local('Palatino Linotype'),
+       local('Book Antiqua'),
+       local('Palatino'),
+       local('Times New Roman'),
+       local('serif');
+  font-display: swap; /* 这很重要，允许在字体加载前使用备选字体 */
+}
+
+/* 添加其他需要的字体 */
+@font-face {
+  font-family: 'Garamond';
+  src: local('Garamond'),
+       local('EB Garamond'),
+       local('Times New Roman'),
+       local('serif');
+  font-display: swap;
+} 

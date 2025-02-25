@@ -1,0 +1,50 @@
+/* 工具栏样式 */
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.toolbar.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.tool-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: var(--card-background);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.tool-button:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    color: var(--accent-color);
+    border-color: rgba(0, 122, 255, 0.2);
+}
+
+.tool-button span {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.tool-button:hover span {
+    opacity: 1;
+} 

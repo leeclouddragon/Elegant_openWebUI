@@ -1,0 +1,67 @@
+/* 导航样式 */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: var(--card-background);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-main {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+}
+
+.logo-main span {
+    margin-right: 8px;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: -2px;
+    letter-spacing: 0.02em;
+}
+
+.nav-right {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-right button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.nav-right button:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.nav-right button span {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+} 
